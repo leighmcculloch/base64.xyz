@@ -16,7 +16,11 @@
   }
 
   function encodedUpdated() {
-    $decoded.value = atob($encoded.value);
+    try {
+      $decoded.value = atob($encoded.value);
+    } catch (err) {
+      console.log($encoded.value + " is not valid base64 encoded.");
+    }
     updatePushState($encoded.value)
   }
 
