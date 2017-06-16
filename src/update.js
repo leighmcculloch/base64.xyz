@@ -5,18 +5,28 @@
     $encoded = document.getElementById('encoded');
     $decoded = document.getElementById('decoded');
 
-    $encoded.addEventListener('input', updateDecoded);
-    $decoded.addEventListener('input', updateEncoded);
+    $encoded.addEventListener('input', encodedUpdated);
+    $decoded.addEventListener('input', decodedUpdated);
 
-    updateDecoded();
+    var encoded = window.location.hash.replace(/^#/, '');
+    if (encoded.length > 0) {
+      $encoded.value = encoded;
+    }
+    encodedUpdated();
   }
 
-  function updateDecoded() {
+  function encodedUpdated() {
     $decoded.value = atob($encoded.value);
+    updatePushState($encoded.value)
   }
 
-  function updateEncoded() {
+  function decodedUpdated() {
     $encoded.value = btoa($decoded.value);
+    updatePushState($encoded.value)
+  }
+
+  function updatePushState(encoded) {
+    window.history.pushState(null, null, '#' + encoded);
   }
 
   window.addEventListener("load", initialize);
