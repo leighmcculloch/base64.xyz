@@ -8,7 +8,7 @@
     $encoded.addEventListener('input', encodedUpdated);
     $decoded.addEventListener('input', decodedUpdated);
 
-    var encoded = window.location.hash.replace(/^#/, '');
+    var encoded = decodeURIComponent(window.location.hash.replace(/^#/, ''));
     if (encoded.length > 0) {
       $encoded.value = encoded;
     }
@@ -30,7 +30,7 @@
   }
 
   function updatePushState(encoded) {
-    window.history.pushState(null, null, '#' + encoded);
+    window.history.pushState(null, null, '#' + encodeURIComponent(encoded));
   }
 
   window.addEventListener("load", initialize);
