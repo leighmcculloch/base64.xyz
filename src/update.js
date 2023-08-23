@@ -33,5 +33,5 @@
     window.history.pushState(null, null, '#' + encodeURIComponent(encoded));
   }
 
-  window.addEventListener("load", initialize);
+  initialize();
 })(window, document);
